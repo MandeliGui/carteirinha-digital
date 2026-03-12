@@ -49,7 +49,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
@@ -59,9 +59,19 @@ class User extends Authenticatable
     public function initials(): string
     {
         return Str::of($this->name)
-            ->explode(' ')
-            ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
-            ->implode('');
+                  ->explode(' ')
+                  ->take(2)
+                  ->map(fn($word) => Str::substr($word, 0, 1))
+                  ->implode('');
+    }
+
+    public function pets()
+    {
+        return $this->belongsToMany(
+            PetsModel::class,
+            'tb_user_pets', // tabela pivô
+            'user_id',      // FK da tabela atual
+            'pet_id'        // FK do model relacionado
+        )->withTimestamps();
     }
 }
