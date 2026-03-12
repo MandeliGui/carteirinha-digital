@@ -25,6 +25,7 @@ class CreateNewUser
             'name'     => $params['name'],
             'email'    => $params['email'],
             'password' => $params['password'],
+            'telefone'  => $params['telefone'],
         ]);
 
         if ($params['tipoUsuario'] === TipoUsuario::VETERINARIO->value) {

@@ -22,6 +22,7 @@ class CriarUsuarioRequest extends BaseValidationRequest
             "name"        => data_get($this->data, "name"),
             "email"       => data_get($this->data, "email"),
             "password"    => data_get($this->data, "password"),
+            "telefone"    => data_get($this->data, "telefone"),
             "tipoUsuario" => data_get($this->data, "tipoUsuario", TipoUsuario::TUTOR->value),
         ];
 
@@ -33,6 +34,7 @@ class CriarUsuarioRequest extends BaseValidationRequest
             "name"        => ['required', 'string', 'max:255'],
             "email"       => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             "password"    => ['required', 'string', 'min:8'],
+            "telefone"    => ['nullable', 'string', 'max:20'],
             "tipoUsuario" => ['required', 'string', new Enum(TipoUsuario::class)],
         ];
     }
